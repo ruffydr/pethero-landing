@@ -1107,7 +1107,7 @@
             <li><a href="#testimonios">Testimonios</a></li>
             <li><a href="#preguntas">Preguntas</a></li>
         </ul>
-        <a href="https://payhip.com/b/re1jh" class="nav-cta" data-payhip-product="re1jh" target="_blank">
+        <a href="https://payhip.com/b/s91rh" class="nav-cta" data-payhip-product="s91rh">
             <i class="fas fa-shopping-cart"></i> Quiero mi eBook
         </a>
     </nav>
@@ -1120,7 +1120,7 @@
                 <div class="hero-subtitle">en 30 días <i class="fas fa-paw" style="color: var(--primary-light);"></i></div>
                 <p class="hero-description">Aprende paso a paso cómo educar a tu cachorro sin castigos, estrés ni frustraciones.</p>
                 <div class="hero-buttons">
-                    <a href="https://payhip.com/b/re1jh" class="btn-primary" data-payhip-product="re1jh" target="_blank">
+                    <a href="https://payhip.com/b/s91rh" class="btn-primary" data-payhip-product="s91rh">
                         <i class="fas fa-shopping-cart"></i> Comprar con Tarjeta
                     </a>
                     <a href="https://www.paypal.com/ncp/payment/4Y7UVP9QBPLA6" class="btn-paypal" target="_blank">
@@ -1247,7 +1247,7 @@
                 </ul>
             </div>
             <div class="modal-footer">
-                <a href="https://payhip.com/b/re1jh" class="btn-primary" data-payhip-product="re1jh" target="_blank">
+                <a href="https://payhip.com/b/s91rh" class="btn-primary" data-payhip-product="s91rh">
                     <i class="fas fa-shopping-cart"></i> Comprar con Tarjeta - $19.99
                 </a>
                 <a href="https://www.paypal.com/ncp/payment/4Y7UVP9QBPLA6" class="btn-paypal" target="_blank">
@@ -1332,7 +1332,7 @@
                     </div>
                 </div>
                 <div class="payment-options">
-                    <a href="https://payhip.com/b/re1jh" class="btn-primary" style="width: 100%; justify-content: center;" data-payhip-product="re1jh" target="_blank">
+                    <a href="https://payhip.com/b/s91rh" class="btn-primary" style="width: 100%; justify-content: center;" data-payhip-product="s91rh">
                         <i class="fas fa-shopping-cart"></i> Comprar con Tarjeta
                     </a>
                     <div class="payment-divider">o</div>
@@ -1493,7 +1493,7 @@
                 <h2>Transforma la vida de tu cachorro hoy</h2>
                 <p>Más de 10,000 dueños ya entrenaron a sus cachorros con éxito usando este método.</p>
                 <div class="payment-options" style="margin-bottom: 1rem;">
-                    <a href="https://payhip.com/b/re1jh" class="btn-primary" data-payhip-product="re1jh" target="_blank">
+                    <a href="https://payhip.com/b/s91rh" class="btn-primary" data-payhip-product="s91rh">
                         <i class="fas fa-shopping-cart"></i> Comprar con Tarjeta
                     </a>
                     <div class="payment-divider">o</div>
@@ -1539,6 +1539,7 @@
     </footer>
 
     <script>
+        // Modal functions
         function openModal() {
             document.getElementById('contentModal').classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -1571,6 +1572,34 @@
                         block: 'start'
                     });
                 }
+            });
+        });
+
+        // Payhip Popup Checkout - Forzar popup en click directo
+        document.addEventListener('DOMContentLoaded', function() {
+            var payhipButtons = document.querySelectorAll('[data-payhip-product]');
+            payhipButtons.forEach(function(button) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var productId = this.getAttribute('data-payhip-product');
+                    
+                    // Abrir popup centrado
+                    var popupWidth = 500;
+                    var popupHeight = 700;
+                    var left = (window.screen.width / 2) - (popupWidth / 2);
+                    var top = (window.screen.height / 2) - (popupHeight / 2);
+                    
+                    var popup = window.open(
+                        'https://payhip.com/b/' + productId,
+                        'PayhipCheckout',
+                        'width=' + popupWidth + ',height=' + popupHeight + ',left=' + left + ',top=' + top + ',scrollbars=yes,resizable=yes'
+                    );
+                    
+                    // Si popup bloqueado, redirigir en misma ventana
+                    if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+                        window.location.href = 'https://payhip.com/b/' + productId;
+                    }
+                });
             });
         });
     </script>
